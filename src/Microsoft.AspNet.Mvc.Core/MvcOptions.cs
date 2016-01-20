@@ -23,7 +23,10 @@ namespace Microsoft.AspNet.Mvc
         {
             CacheProfiles = new Dictionary<string, CacheProfile>(StringComparer.OrdinalIgnoreCase);
             Conventions = new List<IApplicationModelConvention>();
-            Filters = new FilterCollection();
+            Filters = new FilterCollection()
+            {
+                new UnsupportedContentTypeFilter()
+            };
             FormatterMappings = new FormatterMappings();
             InputFormatters = new FormatterCollection<IInputFormatter>();
             OutputFormatters = new FormatterCollection<IOutputFormatter>();

@@ -11,5 +11,11 @@ namespace MvcSandbox.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Custom([FromBody] int i)
+        {
+            return Ok(i);
+        }
     }
 }

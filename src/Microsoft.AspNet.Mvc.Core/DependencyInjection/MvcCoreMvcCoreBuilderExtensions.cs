@@ -9,6 +9,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.ApplicationModels;
 using Microsoft.AspNet.Mvc.Formatters;
 using Microsoft.AspNet.Mvc.Internal;
+using Microsoft.AspNet.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -92,6 +93,22 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddEnumerable(
                 ServiceDescriptor.Transient<IApplicationModelProvider, AuthorizationApplicationModelProvider>());
+        }
+
+        public static IMvcCoreBuilder AddFilters(this IMvcCoreBuilder builder)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            AddFilterServices(builder.Services);
+            return builder;
+        }
+
+        internal static void AddFilterServices(IServiceCollection services)
+        {
+            services.TryAddSingleton<UnsupportedContentTypeFilter>();
         }
 
         /// <summary>

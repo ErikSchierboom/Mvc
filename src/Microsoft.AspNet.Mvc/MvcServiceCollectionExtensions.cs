@@ -44,7 +44,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             builder.AddApiExplorer();
             builder.AddAuthorization();
-
+            builder.AddFilters();
             // Order added affects options setup order
 
             // Default framework order
